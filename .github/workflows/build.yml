@@ -55,7 +55,7 @@ jobs:
         run: |
           docker-slim --in-container build . \
             --dockerfile Dockerfile \
-            --tag wahlfeld:ci-runner \
+            --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             --http-probe-off \
             --exec 'sh test.sh' \
             --include-path '/usr/lib/python3.9/site-packages/certifi/cacert.pem' \
