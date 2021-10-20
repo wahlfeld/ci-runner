@@ -11,9 +11,7 @@
 - go
 - make
 - markdown-link-check
-- pip3
 - pre-commit
-- python3
 - terraform
 - tflint
 - tfsec

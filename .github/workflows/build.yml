@@ -44,23 +44,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download docker-slim
-        run: |
-          curl -L -o ds.tar.gz https://downloads.dockerslim.com/releases/1.36.4/dist_linux.tar.gz
-          tar -xvf ds.tar.gz
-          mv dist_linux/docker-slim /usr/local/bin/
-          mv dist_linux/docker-slim-sensor /usr/local/bin/
-
       - name: Build Docker image
-        run: |
-          docker-slim --in-container build . \
-            --dockerfile Dockerfile \
-            --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-            --http-probe-off \
-            --exec 'sh test.sh' \
-            --include-path '/usr/lib/python3.9/site-packages/certifi/cacert.pem' \
-            --include-path '/usr/lib/python3.9/site-packages/pip/_vendor/certifi/cacert.pem'
+        run: make test-ci
 
       - name: Push Docker image
         if: github.event_name != 'pull_request'
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        run: make push
