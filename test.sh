@@ -2,12 +2,12 @@
 
 set -e
 
-which go
-which goimports
-which golint   
-which terraform
-which checkov  
-which markdown-link-check       
-which tflint             
-which tfsec 
-which pre-commit
+checkov --version
+go version   
+markdown-link-check --help       
+pip3 --version
+pre-commit --version
+python3 --version
+terraform --version
+tflint --version          
+tfsec --version

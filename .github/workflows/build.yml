@@ -7,10 +7,11 @@ name: Docker
 
 on:
   schedule:
-    - cron: '28 10 * * *'
+    # Update weekly
+    - cron: '0 0 * * 0'
   push:
     branches: [ main ]
-    # Publish semver tags as releases.
+    # Publish semver tags as releases
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ main ]
@@ -51,9 +52,26 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      # Build and push Docker image with Buildx (don't push on PR)
+      - name: Download docker-slim
+        run: |
+          curl -L -o ds.tar.gz https://downloads.dockerslim.com/releases/1.37.0/dist_linux.tar.gz
+          tar -xvf ds.tar.gz
+          mv dist_linux/docker-slim /usr/local/bin/
+          mv dist_linux/docker-slim-sensor /usr/local/bin/
+
+      - name: Build Docker image
+        run: |
+          docker-slim --in-container build . \
+            --dockerfile Dockerfile \
+            --tag wahlfeld:ci-runner \
+            --http-probe-off \
+            --exec 'sh test.sh' \
+            --include-path '/usr/lib/python3.9/site-packages/certifi/cacert.pem' \
+            --include-path '/usr/lib/python3.9/site-packages/pip/_vendor/certifi/cacert.pem'
+
+      # Push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
+      - name: Push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
