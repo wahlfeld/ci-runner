@@ -8,6 +8,7 @@
 
 - checkov
 - go
+- make
 - markdown-link-check
 - pip3
 - pre-commit
