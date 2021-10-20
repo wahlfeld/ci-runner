@@ -1,11 +1,12 @@
 FROM golang:1.17-alpine3.14
 
 ENV TERRAFORM_VERSION=1.0.9
-ENV TFSEC_VERSION=0.58.14 
+ENV TFSEC_VERSION=0.58.14
 ENV TFLINT_VERSION=0.33.0
 
 RUN apk update --no-cache && \
     apk add \
+        make \
         python3 \
         nodejs \
         npm
