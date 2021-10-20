@@ -6,6 +6,7 @@
 
 ## Installed Tools
 
+- bash
 - checkov
 - go
 - make
