@@ -49,4 +49,4 @@ jobs:
 
       - name: Push Docker image
         if: github.event_name != 'pull_request'
-        run: make push
+        run: make push-ci
