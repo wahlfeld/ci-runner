@@ -2,7 +2,7 @@
 
 [![build](https://github.com/wahlfeld/ci-runner/actions/workflows/build.yml/badge.svg)](https://github.com/wahlfeld/ci-runner/actions/workflows/build.yml)
 
-## ghcr.io/wahlfeld/ci-runner:latest
+## [ghcr.io/wahlfeld/ci-runner:latest](ghcr.io/wahlfeld/ci-runner:latest)
 
 ## Installed Tools
 
