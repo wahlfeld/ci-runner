@@ -6,6 +6,7 @@ ENV TFLINT_VERSION=0.33.0
 
 RUN apk update --no-cache && \
     apk add \
+        bash \
         make \
         python3 \
         nodejs \

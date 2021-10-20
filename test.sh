@@ -2,6 +2,7 @@
 
 set -e
 
+bash --version
 checkov --version
 go version
 make --version
